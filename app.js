@@ -1,35 +1,36 @@
+require('dotenv').config();
+// Import
+const OpenApiValidator = require("express-openapi-validator");
+const swaggerUi = require("swagger-ui-express");
+const yaml = require("yaml");
+const fs = require("fs");
+
 const express = require('express');
-const {MongoClient, ObjectId} = require('mongodb');
-const userRouter = require ('./routes/userRouter.js')
-const transferRouter = require ('./routes/transferRouter.js')
+const databaseMiddleware = require('./middleware/database-middleware.js');
+const authMiddleware = require('./middleware/authentication-middleware.js');
+const authRouter = require('./routes/auth-router.js');
+const transferRouter = require('./routes/transfer-router.js');
 
 const app = express();
-app.use(express.json())
 
-app.use( async (req, res, next) => {
-    let db
-    try {
-      const client = await new MongoClient('mongodb://127.0.0.1:27017').connect()
-      db = client.db('Revou')
-    } catch (error) {
-      console.log(error, `<=================== error ==================`);
-      return res.status(400).json({ error: "Failed connect to database" });
-    }
-    
-    req.db = db
-    next()
-  })
+app.use(express.json());
+app.use(databaseMiddleware);
 
-
-app.get('/', (req,res)=>{
-    res.send ('Assignment Week 10 - Alyuza Satrio Prayogo')
+app.get('/', (req, res) => {
+  res.send('Week 10 Assignment - Alyuza Satrio Prayogo')
 })
 
-app.use('/v1/users', userRouter)
-app.use('/v1/transactions', transferRouter)
+app.use('/auth', authRouter)
+app.use('/transfers', authMiddleware, transferRouter)
 
-const port = 3000 || 4000;
+// API Documentation
+const openApiPath = "apiDocs.yaml";
+const readApiFile = fs.readFileSync(openApiPath, "utf8");
+const swaggerDocs = yaml.parse(readApiFile); 
 
-app.listen(port, () => {
-    console.log(`Running on port http://localhost:${port}`)
-  })
+// App Router
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); 
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000')
+})
