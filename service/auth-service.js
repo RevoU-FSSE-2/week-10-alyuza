@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken')
 const { JWT_SIGN } = require('../config/jwt.js')
 
 // ========== REGISTER
+const validRoles = ["maker","approver"]
+
 const register = async (req, res) => {
     const { username, password, role } = req.body
 
@@ -11,7 +13,9 @@ const register = async (req, res) => {
             res.status(400).json({ message: "Username can't be blank and doesn't allow to enter of any special character" });
             return
         }
-
+        if (!validRoles.includes(role)) {
+            throw new Error("invalid role")
+        }
         const user = await req.db.collection('users').findOne({ username }) // data 1 user dari DB
         if (user) {
             throw new Error('Sorry, username already exists')
