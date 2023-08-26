@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000
 const uri = 'mongodb+srv://revou:yuzaimoet123@billieeilish.8qyc76s.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
 
-app.get("/items/:my_item", async (req, res) => {
+app.get("/", async (req, res) => {
     let item = await client.db("Revou")
                 .collection("users")
                 .find().toArray()
