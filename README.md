@@ -1,8 +1,8 @@
 # Week 10 Assignment
-
+Hi I'am Alyuza Satrio Prayogo, this is my week 10 assignment.
 The assignment is built using Node.js and Express.js, utilizing MongoDB for database operations and an OpenAPI specification for defining the API endpoints.
 
-##Functionality:
+## Functionality:
 **User Registration & Login:** The application allows users to register with two distinct roles: 'maker' and 'approver'. Users can choose their role during registration for login.
 
 **Transfer List Retrieval:** Users, once logged in, can retrieve a list of all transfers.
