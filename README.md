@@ -7,15 +7,16 @@
 
 - Node.js & Express.js
 - MongoDB
+- OpenAPI Swagger
 - Postman
 
 ## FEATURES
 
-- Get all user data
-- Get user's balance by ID
-- Create / Post a transaction
-- Update / Put a transaction
-- Delete a transaction
+- Register
+- Login
+- Create Transfers (Role: Maker / Approver)
+- List all transaction history (Role: Maker / Approver)
+- Approve / Reject (Role: Approver)
 
 ## API ENDPOINTS
 
