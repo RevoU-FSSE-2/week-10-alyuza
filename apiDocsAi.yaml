@@ -15,6 +15,12 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'Enter the token with the word Bearer'
+  schemas:
+    BadRequest:
+          type: object
+          properties:
+            error:
+              type: string
 
 paths:
   /auth/register:
@@ -30,12 +36,12 @@ paths:
               properties:
                 username:
                   type: string
-                  pattern: '^[^\s]+$' # no space
+                  pattern: '^[^\s]+$' # no whitespace
                   example: user
                 password:
                   type: string
                   minLength: 8 # password min length 8 character
-                  pattern: '^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$' # alphanumeric
+                  pattern: "^[a-zA-Z0-9]*$" # alphanumeric
                 role:
                   type: string
                   enum:
@@ -46,12 +52,30 @@ paths:
                 - password
                 - role
       responses:
-        '201':
-          description: User registered successfully
+        '200':
+          description: 'User Created'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      username:
+                        type: string
+                      role:
+                        type: string
         '400':
-          description: 'Invalid request'
-        '409':
-          description: 'User already exists'
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
 
   /auth/login:
     post:
@@ -72,9 +96,22 @@ paths:
                 - password
       responses:
         '200':
-          description: User logged in successfully
+          description: 'Login Success'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: string
         '400':
-          description: 'Invalid request'
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
 
   /transfers:
     get:
