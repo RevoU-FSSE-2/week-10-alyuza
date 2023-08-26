@@ -3,8 +3,8 @@ info:
   version: 1.0.0
   title: API Documentation for transfer requests
 servers:
-  - url: http://localhost:3000
-    description: 'Local server'
+  - url: https://week-10-alyuza.vercel.app
+    description: 'Production server'
 
 components:
   securitySchemes:
