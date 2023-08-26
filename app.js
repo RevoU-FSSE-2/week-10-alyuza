@@ -14,7 +14,6 @@ const transferRouter = require('./routes/transfer-router.js');
 const app = express();
 const PORT = process.env.PORT || 8080
 const uri = `mongodb+srv://revou:yuzaimoet123@billieeilish.8qyc76s.mongodb.net/?retryWrites=true&w=majority`
-const client = new MongoClient(uri);
 
 app.use(cors());
 app.use(express.json());
