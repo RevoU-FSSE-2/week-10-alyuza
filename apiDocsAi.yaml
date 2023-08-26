@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: API Documentation for transfer requests
+servers:
+  - url: http://localhost:3000
+    description: 'Local server'
+
+components:
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Enter the token with the word Bearer'
+
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  pattern: '^[^\s]+$' # no space
+                  example: user
+                password:
+                  type: string
+                  minLength: 8 # password min length 8 character
+                  pattern: '^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$' # alphanumeric
+                role:
+                  type: string
+                  enum:
+                    - 'maker'
+                    - 'approver'
+              required:
+                - username
+                - password
+                - role
+      responses:
+        '201':
+          description: User registered successfully
+        '400':
+          description: 'Invalid request'
+        '409':
+          description: 'User already exists'
+
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
+      responses:
+        '200':
+          description: User logged in successfully
+        '400':
+          description: 'Invalid request'
+
+  /transfers:
+    get:
+      tags:
+        - Transfer
+      security:
+        - bearer_auth: []
+      responses:
+        '200':
+          description: List of transfers
+        '401':
+          description: 'Unauthorized'
+
+  /transfers/money:
+    post:
+      tags:
+        - Transfer
+      security:
+        - bearer_auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                sourceAccount:
+                  type: string
+                destinationAccount:
+                  type: string
+              required:
+                - amount
+                - sourceAccount
+                - destinationAccount
+      responses:
+        '200':
+          description: Transfer created successfully
+        '400':
+          description: 'Invalid request'
+        '401':
+          description: 'Unauthorized'
+
+  /transfers/{transferId}:
+    patch:
+      tags:
+        - Transfer
+      security:
+        - bearer_auth: []
+      parameters:
+        - name: transferId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - 'approved'
+                    - 'rejected'
+              required:
+                - status
+      responses:
+        '200':
+          description: Transfer status updated successfully
+        '400':
+          description: 'Invalid request'
+        '401':
+          description: 'Unauthorized'
