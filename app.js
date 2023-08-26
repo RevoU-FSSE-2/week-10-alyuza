@@ -1,6 +1,5 @@
 require('dotenv').config();
-// Import
-const OpenApiValidator = require("express-openapi-validator");
+const { MongoClient } = require('mongodb');
 const swaggerUi = require("swagger-ui-express");
 const yaml = require("yaml");
 const fs = require("fs");
@@ -13,6 +12,9 @@ const authRouter = require('./routes/auth-router.js');
 const transferRouter = require('./routes/transfer-router.js');
 
 const app = express();
+const PORT = process.env.PORT || 8080
+const uri = `mongodb+srv://revou:yuzaimoet123@billieeilish.8qyc76s.mongodb.net/?retryWrites=true&w=majority`
+const client = new MongoClient(uri);
 
 app.use(cors());
 app.use(express.json());
@@ -35,7 +37,6 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 
-const port = process.env.PORT || 4000
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`)
-})
+app.listen(PORT, () => {
+  console.log(`⚡️Server is running at localhost:${PORT}`);
+});
