@@ -5,7 +5,7 @@ info:
 servers:
   - url: https://courageous-hen-houndstooth.cyclic.cloud
     description: 'Production server'
-  - url : localhost:3000
+  - url : http://localhost:3000
     description: 'Development server'
 
 components:
