@@ -3,9 +3,9 @@ info:
   version: 1.0.0
   title: API Documentation for transfer requests
 servers:
-  - url: http://localhost:3000/api-docs
+  - url: http://localhost:3000
     description: 'Local server'
-  - url: https://precious-foal-kerchief.cyclic.cloud/api-docs
+  - url: https://precious-foal-kerchief.cyclic.cloud
     description: 'Production server'
 
 components:
