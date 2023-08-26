@@ -33,13 +33,6 @@ const swaggerDocs = yaml.parse(readApiFile);
 // App Router
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); 
 
-app.use(
-  OpenApiValidator.middleware({
-    apiSpec: openApiPath,
-    validateRequests: true,
-  })
-);
-
 app.listen(3000, () => {
   console.log('Server is running on port 3000')
 })
