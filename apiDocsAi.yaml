@@ -3,7 +3,7 @@ info:
   version: 1.0.0
   title: API Documentation for transfer requests
 servers:
-  - url: https://week-10-alyuza.vercel.app
+  - url: https://courageous-hen-houndstooth.cyclic.cloud
     description: 'Production server'
 
 components:
