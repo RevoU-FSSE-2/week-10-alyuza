@@ -43,13 +43,13 @@ The assignment is built using Node.js and Express.js, utilizing MongoDB for data
 }
 ```
 ## API Endpoints
-| Name                                | HTTP Methods| EndPoints                 | 
-|-----------------------|-------------|-------------|---------------------------|
-|**Register User**                    |`POST`       |/auth/register             |
-| **Login User**                      | `POST`      | /auth/login               |
-| **List All Transfer**               | `GET`       | /transfers/               |
-| **Create Transfer**                 | `POST`      |/transfers/money           |
-| **Update Transfer Status by ID**    | `PATCH`     |/transfers/{transferId}    |
+| Name  | HTTP Method | Endpoint | 
+| ----- | ----------- | ---------|
+| **Register User** | `POST` | `/auth/register` |
+| **Login User** | `POST` | `/auth/login` |
+| **List All Transfer** | `GET` | `/transfers/` |
+| **Create Transfer** | `POST` | `/transfers/money` |
+| **Update Transfer Status by ID** | `PATCH`     | `/transfers/{transferId}` |
 
 ## MongoDB User List
 <img src="img/img4.png" alt="mongoDB" width="750px">
