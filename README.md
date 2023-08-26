@@ -1,5 +1,18 @@
 # Week 10 Assignment
 
+The assignment is built using Node.js and Express.js, utilizing MongoDB for database operations and an OpenAPI specification for defining the API endpoints.
+
+##Functionality:
+**User Registration & Login:** The application allows users to register with two distinct roles: 'maker' and 'approver'. Users can choose their role during registration for login.
+
+**Transfer List Retrieval:** Users, once logged in, can retrieve a list of all transfers.
+
+**Transfer Creation:** Authenticated users, particularly those with the 'maker' & 'approver' role, can create new transfer requests.
+
+**Transfer Approval/Rejection:** Users with the 'approver' role have the ability to review the pending transfers and either approve or reject them.
+
+## TOOLS & INGREDIENTS
+
 - Node.js & Express.js
 - Swagger UI
 - Postman
@@ -37,7 +50,10 @@
 | **List All Transfer**               | `GET`       | /transfers/               |
 | **Create Transfer**                 | `POST`      |/transfers/money           |
 | **Update Transfer Status by ID**    | `PATCH`     |/transfers/{transferId}    |
-## MongoDB
+
+## MongoDB User List
+<img src="img/img4.png" alt="mongoDB" width="750px">
+## MongoDB Transfer List
 <img src="img/img1.png" alt="mongoDB" width="750px">
 
 ## Swagger UI
