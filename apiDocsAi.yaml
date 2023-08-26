@@ -15,12 +15,6 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: 'Enter the token with the word Bearer'
-  schemas:
-    BadRequest:
-          type: object
-          properties:
-            error:
-              type: string
 
 paths:
   /auth/register:
@@ -71,11 +65,14 @@ paths:
                       role:
                         type: string
         '400':
-          description: 'Bad Request'
+          description: 'Invalid Request'
           content:
-            application/json:
+             application/json:
               schema:
-                $ref: '#/components/schemas/BadRequest'
+                type: object
+                properties:
+                  message:
+                    type: string
 
   /auth/login:
     post:
@@ -107,12 +104,7 @@ paths:
                   data:
                     type: string
         '400':
-          description: 'Bad Request'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequest'
-
+          description: 'Invalid Request'
   /transfers:
     get:
       tags:
