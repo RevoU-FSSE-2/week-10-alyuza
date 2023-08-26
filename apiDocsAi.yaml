@@ -31,13 +31,15 @@ paths:
                 username:
                   type: string
                   pattern: '^[^\s]+$' # no whitespace
-                  example: user
+                  example: yuza.approver
                 password:
                   type: string
                   minLength: 8 # password min length 8 character
+                  example: yuza1234
                   pattern: "^[a-zA-Z0-9]*$" # alphanumeric
                 role:
                   type: string
+                  example: approver
                   enum:
                     - 'maker'
                     - 'approver'
@@ -86,8 +88,10 @@ paths:
               properties:
                 username:
                   type: string
+                  example: yuza.approver
                 password:
                   type: string
+                  example: yuza1234
               required:
                 - username
                 - password
