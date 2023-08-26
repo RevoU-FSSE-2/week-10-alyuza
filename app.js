@@ -1,5 +1,5 @@
+const mongoose = require('mongoose')
 require('dotenv').config();
-const { MongoClient } = require('mongodb');
 const swaggerUi = require("swagger-ui-express");
 const yaml = require("yaml");
 const fs = require("fs");
@@ -12,8 +12,7 @@ const authRouter = require('./routes/auth-router.js');
 const transferRouter = require('./routes/transfer-router.js');
 
 const app = express();
-const PORT = process.env.PORT || 8080
-const uri = `mongodb+srv://revou:yuzaimoet123@billieeilish.8qyc76s.mongodb.net/?retryWrites=true&w=majority`
+const url = process.env.CONNECTION_STRING;
 
 app.use(cors());
 app.use(express.json());
@@ -35,7 +34,11 @@ const swaggerDocs = yaml.parse(readApiFile);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); 
 
 
-
-app.listen(PORT, () => {
-  console.log(`⚡️Server is running at localhost:${PORT}`);
-});
+// Connect node JS to mongoDB server
+mongoose.connect(url)
+    .then( () => {
+        console.log('Connected to the database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. n${err}`);
+    })
