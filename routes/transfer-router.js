@@ -5,7 +5,7 @@ const { authorizationApprover, authorizationAll } = require('../middleware/autho
 const transferRouter = Router()
 
 transferRouter.get('/', getAllTransfer)
-transferRouter.post('/', authorizationAll, createTransfer)
+transferRouter.post('/money', authorizationAll, createTransfer)
 transferRouter.patch('/:id', authorizationApprover, transferApproval)
 
 module.exports = transferRouter
