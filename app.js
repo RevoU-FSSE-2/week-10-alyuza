@@ -4,6 +4,7 @@ const OpenApiValidator = require("express-openapi-validator");
 const swaggerUi = require("swagger-ui-express");
 const yaml = require("yaml");
 const fs = require("fs");
+const cors = require("cors")
 
 const express = require('express');
 const databaseMiddleware = require('./middleware/database-middleware.js');
@@ -13,6 +14,7 @@ const transferRouter = require('./routes/transfer-router.js');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(databaseMiddleware);
 
@@ -24,7 +26,7 @@ app.use('/auth', authRouter)
 app.use('/transfers', authMiddleware, transferRouter)
 
 // API Documentation
-const openApiPath = "apiDocs.yaml";
+const openApiPath = "apiDocsAi.yaml";
 const readApiFile = fs.readFileSync(openApiPath, "utf8");
 const swaggerDocs = yaml.parse(readApiFile); 
 
